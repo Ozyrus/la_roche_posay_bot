@@ -1,5 +1,222 @@
 <context>
-	<input name = "Hello" pattern  = "text">
-		<output value = "Привет! Я Света, электроподружка La roche-posay"/>
+	<input name = "Hello" pattern  = "$Text">
+		<output value = "Привет! Я Света, электроподружка La roche-posay. Расскажете мне про свою кожу?"/>
+		<context>
+		<input name = "Yes_zero" pattern = "* да *">
+			<ouput value = "Отлично! Какая у вас кожа -- чувствительная, очень чувствительная или нечувствительная?"/>
+				<context id = "sensitivity"/>
+		</input>
+		</context>
+		<context id = "sensitivity">
+			<input name = "sensitive" pattern = "* чувствительная *">
+				<output value = "Хорошо; а она реагирует на косметику или другие факторы?"/>
+					<context id = "cosmetic_reaction"/>
+			</input>
+			<input name = "not sensitive" pattern = "* нечувствительная *">
+				<output value = "Хорошо; считаете ли вы свою кожу жирной или склонной к жирности?"/>
+					<context id = "oily_skin"/>
+			</input>
+			<input name = "very sensitive" pattern = "* очень *">
+				<output value = "Хорошо; а какую текстуру вы предпочитаете?"/>
+					<context id = "texture_preference_toleriane"/>
+			</input>
+		</context>
+		<context id = "cosmetic_reaction">
+			<input name = "yes" pattern = "* да *">
+				<ouput value = "Ага; а какую текстуру вы предпочитаете? Легкую или насыщенную?"/>
+					<context id = "texture_preference_toleriane"/>
+			</input>
+			<input name = "no" pattern = "* нет *">
+				<ouput value = "Ага; а вы наблюдаете покраснения и приливы к коже? Может быть, она реагирует на острую пищу?"/>
+					<context id = "red_spicy"/>
+			</input>
+		</context>
+		<context id = "red_spicy">
+			<input name = "yes" pattern = "* да *">
+				<ouput value = "Ага; а какую текстуру вы предпочитаете? Легкую или насыщенную?"/>
+					<context id = "texture_preference_rosaliac"/>
+			</input>
+			<input name = "no" pattern = "* нет *">
+				<ouput value = "Ага; считаете ли вы свою кожу жирной или склонной к жирности?"/>
+					<context id = "oily_skin"/>
+			</input>
+		</context>
+		<context id = "texture_preference_toleriane">
+			<input name = "light" pattern = "* легк* *">
+				<ouput value = "Ага; интересуют ли вас средства для ночного ухода?"/>
+					<context id = "night_care"/>
+			</input>
+			<input name = "rich" pattern = "* насыщ* *">
+				<ouput value = "Ага; интересуют ли вас средства для ночного ухода?"/>
+					<context id = "night_care"/>
+			</input>
+		</context>
+		<context id = "night_care">
+			<input name = "yes" pattern = "* да *">
+				<ouput value = "Ага; считаете ли вы свою кожу жирной или склонной к жирности?"/>
+					<context id = "oily_skin"/>
+			</input>
+			<input name = "no" pattern = "* нет *">
+				<ouput value = "Ага; считаете ли вы свою кожу жирной или склонной к жирности?"/>
+					<context id = "oily_skin"/>
+			</input>
+		</context>
+		<context id = "texture_preference_rosaliac">
+			<input name = "light" pattern = "* легк* *">
+				<ouput value = "Ага; считаете ли вы свою кожу жирной или склонной к жирности?"/>
+					<context id = "oily_skin"/>
+			</input>
+			<input name = "rich" pattern = "* насыщ* *">
+				<ouput value = "Ага; считаете ли вы свою кожу жирной или склонной к жирности?"/>
+					<context id = "oily_skin"/>
+			</input>
+		</context>
+		<context id = "oily_skin">
+			<input name = "yes" pattern = "* да *">
+				<ouput value = "Используете ли Вы лекарственные средства для коррекции акне/жирной кожи?"/>
+					<context id = "oily_correction"/>
+			</input>
+			<input name = "no_not_sensitive" pattern = "* нет *">
+				<ouput value = "Испытываете ли Вы чувство стянутости на коже?"/>
+					<context id = "feeling_tight"/>
+			</input>
+			<input name = "no_yes_sensitive" pattern = "* нет *">
+				<ouput value = "Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+		</context>
+		<context id = "oily_correction">
+			<input name = "yes" pattern = "* да *">
+				<ouput value = "Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+			<input name = "no" pattern = "* нет *">
+				<ouput value = "Какую проблему вы хотите устранить?Прыщи, черные точки, жирный блеск, неоднородный тон, камедоны?"/>
+					<context id = "what_problem"/>
+			</input>
+		</context>
+		<context id = "what_problem">
+			<input name = "acne" pattern = "* прыщи *">
+				<output value = "Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+			<input name = "black dots" pattern = "* черные точки *">
+				<output value = "Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+			<input name = "oily_shine" pattern = "* жирный блеск *">
+				<output value = "Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+		</context>
+		<context id = "feeling_tight">
+			<input name = "yes" pattern = "* да *">
+				<ouput value = "Легкая или насыщенная текстура вам больше нравится?"/>
+					<context id = "texture_preference_nutritic"/>
+			</input>
+			<input name = "no" pattern = "* (нет|иногда) *">
+				<ouput value = "Какие у вас ожидания от средства ухода за кожей? Увлажнение или еще и улучшение цвета лица?"/>
+					<context id = "expectations_hydrating"/>
+			</input>
+		</context>
+		<context id = "texture_preference_nutritic">
+			<input name = "light" pattern = "* легк* *">
+				<ouput value = "Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+			<input name = "rich" pattern = "* насыщ* *">
+				<ouput value = "Ага; Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+		</context>
+		<context id = "expectations_hydrating">
+			<input name = "hydration" pattern = "* увлажнение* *">
+				<ouput value = "Ага; Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+			<input name = "better color" pattern = "* насыщ* *">
+				<ouput value = "Ага; Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+		</context>
+		<context id = "texture_preference_hydreane">
+			<input name = "light" pattern = "* легк* *">
+				<ouput value = "Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+			<input name = "rich" pattern = "* насыщ* *">
+				<ouput value = "Ага; Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+		</context>
+		<context id = "texture_preference_hydraphase">
+			<input name = "light" pattern = "* легк* *">
+				<ouput value = "Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+			<input name = "rich" pattern = "* насыщ* *">
+				<ouput value = "Ага; Интересует ли вас коррекция возрастных изменений?"/>
+					<context id = "age_correction"/>
+			</input>
+		</context>
+		<context id = "age_correction">
+			<input name = "yes" pattern = "* да *">
+				<ouput value = "Какие возрастные признаки вы хотели бы корректировать? Морщины? Или может быть обвисание контуров и коррекция овала лица? Или повышение плотности кожи?"/>
+					<context id = "what_correction"/>
+			</input>
+			<input name = "no" pattern = "* (нет|иногда) *">
+				<ouput value = "Вы моете лицо с водой или без?"/>
+					<context id = "water_no_water"/>
+			</input>
+		</context>
+		<context id = "what_correction">
+			<input name = "wrinkles" pattern = "* легк* *">
+				<ouput value = "Какие у вас еще ожидания от продукта? Ровный тон кожи или повышение упругости и эластичности?"/>
+					<context id = "expectations"/>
+			</input>
+			<input name = "oval" pattern = "* насыщ* *">
+				<ouput value = "А вы моете лицо с водой или без?"/>
+					<context id = "water_no_water"/>
+			</input>
+		</context>
+		<context id = "expectations">
+			<input name = "tone" pattern = "* тон* *">
+				<ouput value = "Хорошо -- а вам интересен уход для глаз?"/>
+					<context id = "eyecare"/>
+			</input>
+			<input name = "elasticity" pattern = "* эласт* *">
+				<ouput value = "Хорошо -- а вам интересен уход для глаз?"/>
+					<context id = "eyecare"/>
+			</input>
+		</context>
+		<context id = "water_no_water">
+			<input name = "water_sensitive" pattern = "* с *">
+				<ouput value = "Хорошо -- а вам интересен уход для глаз?"/>
+					<context id = "eyecare"/>
+			</input>
+			<input name = "water_oily" pattern = "* с *">
+				<ouput value = "Хорошо -- а вам интересен уход для глаз?"/>
+					<context id = "eyecare"/>
+			</input>
+			<input name = "water_nooilynosensitive" pattern = "* с *">
+				<ouput value = "Хорошо -- а вам интересен уход для глаз?"/>
+					<context id = "eyecare"/>
+			</input>
+			<input name = "no water" pattern = "* без *">
+				<ouput value = "Хорошо -- а вам интересен уход для глаз?"/>
+					<context id = "eyecare"/>
+			</input>
+		</context>
+		<context id = "eyecare">
+			<input name = "yes_age" pattern = "* да *">
+				<ouput value = "Хорошо -- мы с вами свяжемся ;)"/>
+			</input>
+			<input name = "yes_no_age" pattern = "* да *">
+				<ouput value = "Хорошо -- мы с вами свяжемся ;)"/>
+			</input>
+			<input name = "no" pattern = "* нет *">
+				<ouput value = "Хорошо -- мы с вами свяжемся ;)"/>
+			</input>
+		</context>
 	</input>
 </context>
