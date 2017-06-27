@@ -1,5 +1,5 @@
 <context>
 	<input name = "Hello" pattern  = "text">
-		<output = "Привет! Я Света, электроподружка La roche-posay"/>
+		<output value = "Привет! Я Света, электроподружка La roche-posay"/>
 	</input>
 </context>
